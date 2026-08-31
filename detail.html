@@ -1,0 +1,272 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Watch Pro - Timedoor Shop</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <style>
+    .product-detail-img {
+      object-fit: cover;
+      max-height: 500px;
+      width: 100%;
+      border-radius: 8px;
+    }
+    .cursor-pointer {
+      cursor: pointer;
+    }
+    footer a {
+      text-decoration: none;
+    }
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="index.html">
+        <i class="bi bi-shop me-2"></i>Timedoor Shop
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Beranda</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="product.html">Produk</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Kategori</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Tentang</a>
+          </li>
+        </ul>
+        <form class="d-flex me-3" role="search">
+          <input class="form-control me-2" type="search" placeholder="Cari produk..." aria-label="Search">
+          <button class="btn btn-outline-light" type="submit">
+            <i class="bi bi-search"></i>
+          </button>
+        </form>
+        <a href="#" class="btn btn-outline-light position-relative">
+          <i class="bi bi-cart3"></i>
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+            3
+          </span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Breadcrumb -->
+  <div class="bg-light py-3 mb-5 border-bottom">
+    <div class="container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb m-0">
+          <li class="breadcrumb-item"><a href="index.html" class="text-decoration-none">Beranda</a></li>
+          <li class="breadcrumb-item"><a href="product.html" class="text-decoration-none">Produk</a></li>
+          <li class="breadcrumb-item"><a href="#" class="text-decoration-none">Elektronik</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Smart Watch Pro</li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Product Details -->
+  <section class="mb-5">
+    <div class="container">
+      <div class="row g-5">
+        <!-- Product Image -->
+        <div class="col-md-6">
+          <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&q=80" alt="Smart Watch Pro" class="img-fluid product-detail-img shadow-sm mb-3">
+          <div class="row g-2">
+            <div class="col-3">
+              <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=200&q=80" alt="Thumbnail 1" class="img-fluid rounded cursor-pointer opacity-75 border border-primary">
+            </div>
+            <div class="col-3">
+              <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=200&q=80" alt="Thumbnail 2" class="img-fluid rounded cursor-pointer opacity-75">
+            </div>
+          </div>
+        </div>
+
+        <!-- Product Info -->
+        <div class="col-md-6">
+          <span class="badge bg-primary mb-2">Elektronik</span>
+          <h1 class="fw-bold mb-3">Smart Watch Pro</h1>
+          <div class="d-flex align-items-center mb-3">
+            <div class="text-warning me-2">
+              <i class="bi bi-star-fill"></i>
+              <i class="bi bi-star-fill"></i>
+              <i class="bi bi-star-fill"></i>
+              <i class="bi bi-star-fill"></i>
+              <i class="bi bi-star-half"></i>
+            </div>
+            <span class="text-muted">(128 Ulasan)</span>
+          </div>
+          
+          <h2 class="text-primary fw-bold mb-4">Rp 1.299.000</h2>
+          
+          <p class="mb-4">
+            Jam tangan pintar dengan fitur kesehatan lengkap, desain elegan, dan baterai tahan lama. Cocok untuk menemani aktivitas harian Anda, mulai dari olahraga hingga meeting di kantor. Terkoneksi mulus dengan smartphone Anda.
+          </p>
+
+          <div class="mb-4">
+            <h6 class="fw-bold">Pilih Warna:</h6>
+            <div class="btn-group" role="group">
+              <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
+              <label class="btn btn-outline-dark" for="btnradio1">Hitam</label>
+
+              <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
+              <label class="btn btn-outline-dark" for="btnradio2">Perak</label>
+              
+              <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off">
+              <label class="btn btn-outline-dark" for="btnradio3">Emas</label>
+            </div>
+          </div>
+
+          <div class="d-flex gap-3 mb-4">
+            <div class="input-group" style="width: 130px;">
+              <button class="btn btn-outline-secondary" type="button">-</button>
+              <input type="text" class="form-control text-center" value="1">
+              <button class="btn btn-outline-secondary" type="button">+</button>
+            </div>
+            <button class="btn btn-primary flex-grow-1">
+              <i class="bi bi-cart-plus me-2"></i>Masukkan Keranjang
+            </button>
+          </div>
+          
+          <hr>
+          
+          <ul class="list-unstyled mt-4">
+            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Garansi Resmi 1 Tahun</li>
+            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Gratis Pengiriman ke Seluruh Indonesia</li>
+            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Bisa Retur dalam 7 Hari</li>
+          </ul>
+        </div>
+      </div>
+      
+      <!-- Deskripsi Lengkap & Review -->
+      <div class="row mt-5">
+        <div class="col-12">
+          <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+              <button class="nav-link active" id="deskripsi-tab" data-bs-toggle="tab" data-bs-target="#deskripsi-tab-pane" type="button" role="tab" aria-controls="deskripsi-tab-pane" aria-selected="true">Deskripsi</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="spesifikasi-tab" data-bs-toggle="tab" data-bs-target="#spesifikasi-tab-pane" type="button" role="tab" aria-controls="spesifikasi-tab-pane" aria-selected="false">Spesifikasi</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="ulasan-tab" data-bs-toggle="tab" data-bs-target="#ulasan-tab-pane" type="button" role="tab" aria-controls="ulasan-tab-pane" aria-selected="false">Ulasan</button>
+            </li>
+          </ul>
+          <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="deskripsi-tab-pane" role="tabpanel" aria-labelledby="deskripsi-tab" tabindex="0">
+              <p>Smart Watch Pro merupakan jam tangan pintar generasi terbaru yang dirancang untuk mendukung gaya hidup aktif Anda. Dilengkapi dengan sensor detak jantung, monitor saturasi oksigen, serta tracking untuk lebih dari 50 jenis olahraga.</p>
+              <p>Desainnya yang ramping dan pilihan warna yang menarik membuatnya cocok digunakan untuk berbagai kesempatan. Tahan air hingga kedalaman 50 meter, siap menemani Anda berenang atau saat cuaca tidak menentu.</p>
+            </div>
+            <div class="tab-pane fade" id="spesifikasi-tab-pane" role="tabpanel" aria-labelledby="spesifikasi-tab" tabindex="0">
+              <table class="table table-striped">
+                <tbody>
+                  <tr>
+                    <th scope="row">Layar</th>
+                    <td>AMOLED 1.43 Inci</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Baterai</th>
+                    <td>Hingga 14 Hari (Penggunaan Normal)</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Konektivitas</th>
+                    <td>Bluetooth 5.2</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Water Resistance</th>
+                    <td>5 ATM (50 Meter)</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="tab-pane fade" id="ulasan-tab-pane" role="tabpanel" aria-labelledby="ulasan-tab" tabindex="0">
+              <div class="d-flex mb-4">
+                <div class="flex-shrink-0">
+                  <div class="bg-secondary text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">A</div>
+                </div>
+                <div class="flex-grow-1 ms-3">
+                  <h6 class="mb-1">Andi Saputra</h6>
+                  <div class="text-warning mb-2 small">
+                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                  </div>
+                  <p>Sangat puas dengan kualitas barang. Layarnya jernih dan respon sentuhannya sangat cepat. Pengiriman juga super kilat!</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white pt-5 pb-3">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-md-4">
+          <h5 class="fw-bold mb-3">
+            <i class="bi bi-shop me-2"></i>Timedoor Shop
+          </h5>
+          <p class="text-white-50">
+            Toko online terpercaya dengan berbagai produk berkualitas dan layanan pelanggan terbaik.
+          </p>
+          <div class="d-flex gap-3">
+            <a href="#" class="text-white"><i class="bi bi-facebook fs-5"></i></a>
+            <a href="#" class="text-white"><i class="bi bi-instagram fs-5"></i></a>
+            <a href="#" class="text-white"><i class="bi bi-twitter-x fs-5"></i></a>
+            <a href="#" class="text-white"><i class="bi bi-youtube fs-5"></i></a>
+          </div>
+        </div>
+        <div class="col-md-2">
+          <h6 class="fw-bold mb-3">Menu</h6>
+          <ul class="list-unstyled text-white-50">
+            <li class="mb-2"><a href="index.html" class="text-white-50">Beranda</a></li>
+            <li class="mb-2"><a href="product.html" class="text-white-50">Produk</a></li>
+            <li class="mb-2"><a href="#" class="text-white-50">Kategori</a></li>
+            <li class="mb-2"><a href="#" class="text-white-50">Promo</a></li>
+          </ul>
+        </div>
+        <div class="col-md-3">
+          <h6 class="fw-bold mb-3">Bantuan</h6>
+          <ul class="list-unstyled text-white-50">
+            <li class="mb-2"><a href="#" class="text-white-50">Cara Berbelanja</a></li>
+            <li class="mb-2"><a href="#" class="text-white-50">Pengiriman</a></li>
+            <li class="mb-2"><a href="#" class="text-white-50">Pengembalian</a></li>
+            <li class="mb-2"><a href="#" class="text-white-50">FAQ</a></li>
+          </ul>
+        </div>
+        <div class="col-md-3">
+          <h6 class="fw-bold mb-3">Kontak</h6>
+          <ul class="list-unstyled text-white-50">
+            <li class="mb-2"><i class="bi bi-geo-alt me-2"></i>Jakarta, Indonesia</li>
+            <li class="mb-2"><i class="bi bi-envelope me-2"></i>info@timedoorshop.com</li>
+            <li class="mb-2"><i class="bi bi-telephone me-2"></i>+62 812 3456 7890</li>
+          </ul>
+        </div>
+      </div>
+      <hr class="border-secondary my-4">
+      <div class="text-center text-white-50 small">
+        &copy; 2026 Timedoor Shop. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
