@@ -43,6 +43,41 @@ function initHeader() {
   initCart();
 }
 
+// Catalog Filter
+function initCatalogFilter() {
+  const semuaCheckbox = document.querySelector("#catSemua");
+  const applyButton = document.querySelector("#btnTerapkanFilter");
+  if (!semuaCheckbox || !applyButton) return;
+
+
+  const categoryCheckboxes = document.querySelectorAll(".cat-filter:not(#catSemua)");
+
+  semuaCheckbox.addEventListener("change", () => {
+    if (semuaCheckbox.checked) {
+      categoryCheckboxes.forEach((checkbox) => (checkbox.checked = false) );
+    }
+  });
+
+    categoryCheckboxes.forEach((checkbox) => {
+    checkbox.addEventListener("change", () => {
+      const anyChecked = Array.from(categoryCheckboxes).some((c) => c.checked);
+      semuaCheckbox.checked = !anyChecked;
+    });
+  });
+
+  applyButton.addEventListener("click", () => {
+    const selectedCategories = Array.from(categoryCheckboxes)
+      .filter((checkbox) => checkbox.checked)
+      .map((checkbox) => checkbox.value);
+
+    const filteredProducts = selectedCategories.length
+      ? products.filter((product) => selectedCategories.includes(product.category))
+      : products;
+
+    renderProductList("#catalog-product-list", filteredProducts, "col-md-6 col-xl-4", { linkToDetail: true });
+  });
+
+}
 
 // Load Header & Footer Partials
 function loadPartial(selector, url, callback) {
@@ -62,4 +97,5 @@ loadPartial("#footer", "footer.html");
 
 // Render Product Cards (component-based, from js/products.js + js/productCard.js)
 renderProductList("#home-product-list", products, "col-sm-6 col-lg-3");
-renderProductList("#catalog-product-list", products.slice(0, 6), "col-md-6 col-xl-4", { linkToDetail: true });
+renderProductList("#catalog-product-list", products, "col-md-6 col-xl-4", { linkToDetail: true });
+initCatalogFilter();
