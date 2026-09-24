@@ -43,6 +43,57 @@ function initHeader() {
   initCart();
 }
 
+// Catalog Pagination
+const PRODUCTS_PER_PAGE = 6;
+let catalogProducts = products;
+let currentPage = 1;
+
+function renderCatalogPage(page) {
+  const pagination = document.querySelector("#catalog-pagination");
+  if (!pagination) return;   
+
+  const totalPages = Math.max(1, Math.ceil(catalogProducts.length / PRODUCTS_PER_PAGE));
+  currentPage = Math.min(Math.max(page, 1), totalPages);
+
+  const start = (currentPage - 1) * PRODUCTS_PER_PAGE;
+  const pageProducts = catalogProducts.slice(start, start + PRODUCTS_PER_PAGE);
+  renderProductList("#catalog-product-list", pageProducts, "col-md-6 col-xl-4", { linkToDetail: true });
+
+  const pageItem = (label, targetPage, { disabled = false, active = false } = {}) => `
+    <li class="page-item ${disabled ? "disabled" : ""} ${active ? "active" : ""}">
+      <a class="page-link" href="#" data-page="${targetPage}">${label}</a>
+    </li>`;
+
+  let items = pageItem("Sebelumnya", currentPage - 1, { disabled: currentPage === 1 });
+  for (let i = 1; i <= totalPages; i++) {
+    items += pageItem(i, i, { active: i === currentPage });
+  }
+  items += pageItem("Selanjutnya", currentPage + 1, { disabled: currentPage === totalPages });
+
+  pagination.innerHTML = items;
+
+}
+
+
+function initCatalogPagination() {
+  const pagination = document.querySelector("#catalog-pagination");
+  if (!pagination) return;
+
+  pagination.addEventListener("click", (event) => {
+    const link = event.target.closest(".page-link");
+    if (!link) return;
+
+    event.preventDefault();
+    if (link.parentElement.classList.contains("disabled")) return;
+
+    renderCatalogPage(Number(link.dataset.page));
+    document.querySelector("#catalog-product-list").scrollIntoView({ behavior: "smooth" });
+
+  });
+
+  renderCatalogPage(1);
+}
+
 // Catalog Filter
 function initCatalogFilter() {
   const semuaCheckbox = document.querySelector("#catSemua");
@@ -70,11 +121,11 @@ function initCatalogFilter() {
       .filter((checkbox) => checkbox.checked)
       .map((checkbox) => checkbox.value);
 
-    const filteredProducts = selectedCategories.length
+    catalogProducts = selectedCategories.length
       ? products.filter((product) => selectedCategories.includes(product.category))
       : products;
 
-    renderProductList("#catalog-product-list", filteredProducts, "col-md-6 col-xl-4", { linkToDetail: true });
+    renderCatalogPage(1);
   });
 
 }
@@ -97,5 +148,5 @@ loadPartial("#footer", "footer.html");
 
 // Render Product Cards (component-based, from js/products.js + js/productCard.js)
 renderProductList("#home-product-list", products, "col-sm-6 col-lg-3");
-renderProductList("#catalog-product-list", products, "col-md-6 col-xl-4", { linkToDetail: true });
+initCatalogPagination();
 initCatalogFilter();
