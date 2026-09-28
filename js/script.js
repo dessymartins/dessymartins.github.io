@@ -38,15 +38,37 @@ function initCart() {
   });
 }
 
+// Logic search
+function initSearch() {
+  const searchInput = document.querySelector("#search-input");
+  if (searchInput) searchInput.value = searchKeyword;
+}
+
 function initHeader() {
   initTheme();
   initCart();
+  initSearch();
 }
 
 // Catalog Pagination
 const PRODUCTS_PER_PAGE = 6;
-let catalogProducts = products;
+const searchKeyword = (new URLSearchParams(window.location.search).get("q") || "").trim();
+let selectedCategories = [];
+let catalogProducts = products; 
 let currentPage = 1;
+
+function applyCatalogFilters() {
+  const keyword = searchKeyword.toLowerCase();
+
+  catalogProducts = products.filter((product) => { 
+    const matchesKeyword = product.title.toLowerCase().includes(keyword); 
+    const matchesCategory = !selectedCategories.length || selectedCategories.includes(product.category);
+    return matchesKeyword && matchesCategory;
+  });
+
+  renderCatalogPage(1);
+
+}
 
 function renderCatalogPage(page) {
   const pagination = document.querySelector("#catalog-pagination");
@@ -58,6 +80,14 @@ function renderCatalogPage(page) {
   const start = (currentPage - 1) * PRODUCTS_PER_PAGE;
   const pageProducts = catalogProducts.slice(start, start + PRODUCTS_PER_PAGE);
   renderProductList("#catalog-product-list", pageProducts, "col-md-6 col-xl-4", { linkToDetail: true });
+
+  if (!catalogProducts.length) {
+    const massage = searchKeyword ? `product "${searchKeyword}" tidak ditemukan.` : "Produk tidak ditemukan.";
+    const empty = document.createElement("p");
+    empty.className = "text-center text-muted py-5";
+    empty.textContent = massage;
+    document.querySelector("#catalog-product-list").replaceChildren(empty);
+  }
 
   const pageItem = (label, targetPage, { disabled = false, active = false } = {}) => `
     <li class="page-item ${disabled ? "disabled" : ""} ${active ? "active" : ""}">
@@ -91,7 +121,7 @@ function initCatalogPagination() {
 
   });
 
-  renderCatalogPage(1);
+ applyCatalogFilters();
 }
 
 // Catalog Filter
@@ -117,7 +147,7 @@ function initCatalogFilter() {
   });
 
   applyButton.addEventListener("click", () => {
-    const selectedCategories = Array.from(categoryCheckboxes)
+    selectedCategories = Array.from(categoryCheckboxes)
       .filter((checkbox) => checkbox.checked)
       .map((checkbox) => checkbox.value);
 
@@ -125,7 +155,7 @@ function initCatalogFilter() {
       ? products.filter((product) => selectedCategories.includes(product.category))
       : products;
 
-    renderCatalogPage(1);
+    applyCatalogFilters();
   });
 
 }
