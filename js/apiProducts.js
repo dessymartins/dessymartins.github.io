@@ -1,8 +1,11 @@
 // API Product List (api-products.html): fetches products from the free DummyJSON API,
 // paginated on the server with ?limit=&skip= (the API returns the total count)
 const API_URL = "https://dummyjson.com/products";
+const API_SEARCH_URL="https://dummyjson.com/products/search"
 const API_PRODUCTS_PER_PAGE = 12;
 const API_MAX_PRODUCTS = 100;
+let apiSearchKeyword = "";
+let apiRequestId = 0;
 
 // Maps a DummyJSON product into the shape renderProductCard() expects
 function toCardProduct(item) {
@@ -46,17 +49,38 @@ function loadApiProducts(page) {
   // Only the first API_MAX_PRODUCTS are shown, so the last page asks for just the remainder
   const skip = (page - 1) * API_PRODUCTS_PER_PAGE;
   const limit = Math.min(API_PRODUCTS_PER_PAGE, API_MAX_PRODUCTS - skip);
-  const url = `${API_URL}?limit=${limit}&skip=${skip}&select=title,price,thumbnail,category,description`;
+  const params = new URLSearchParams({limit, skip, select: "title,price,thumbnail,category,description"});
+  if (apiSearchKeyword) params.set("q", apiSearchKeyword);
+  const url = `${apiSearchKeyword ? API_SEARCH_URL : API_URL}?${params}`;
+
+  const request = ++apiRequestId;
 
   container.innerHTML = `<p class="text-center text-muted py-5">Memuat produk...</p>`;
 
   fetch(url)
-    .then((response) => response.json())
+    // .then((response) => response.json())
+    .then((response) => {
+      if (!response.ok) throw new Error("API request failed");
+      return response.json();
+    })
     .then((data) => {
+      if (request !== apiRequestId) return;
+
+      if (!data.products.length) {
+        const empty = document.createElement("p");
+        empty.className = "text-center text-muted py-5";
+        empty.textContent = apiSearchKeyword ? `Product "${apiSearchKeyword}" tidak ditemukan.` : "Produk tidak ditemukan.";
+        container.appendChild(empty);
+        document.querySelector("#api-pagination").innerHTML = "";
+        return;
+      }
+
+
       renderProductList("#api-product-list", data.products.map(toCardProduct), "col-sm-6 col-lg-3");
       renderApiPagination(page, Math.max(1, Math.ceil(Math.min(data.total, API_MAX_PRODUCTS) / API_PRODUCTS_PER_PAGE)));
     })
     .catch(() => {
+      if (requestId !== apiRequestId) return;
       container.innerHTML = `<p class="text-center text-danger py-5">Gagal memuat produk dari API.</p>`;
     });
 }
@@ -78,4 +102,19 @@ function initApiPagination() {
   loadApiProducts(1);
 }
 
+//fungsi search form
+function iniApiSearch() {
+  const form = document.querySelector("#api-search-form");
+  const input = document.querySelector("#api-search-input");
+  if (!form || !input) return;
+
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    apiSearchKeyword = input.value.trim();
+    loadApiProducts(1);
+  });
+
+}
+
 initApiPagination();
+iniApiSearch();
